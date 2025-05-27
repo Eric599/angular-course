@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
 const randIndex = Math.floor(Math.random() * DUMMY_USERS.length)
@@ -11,21 +11,13 @@ const randIndex = Math.floor(Math.random() * DUMMY_USERS.length)
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-    //selectedUser = DUMMY_USERS[randIndex]
-    selectedUser = signal(DUMMY_USERS[randIndex])
-    // signals need to use computed function instead of having getter function below
-    // signals have better performance
-    imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar)
-    
-    // "getter" function to get imagePath of user
-    // get imagePath() {
-    //     return 'assets/users/' + this.selectedUser.avatar
-    // }
+    // input decorator is similar to setting props in React
+    // if we are going to use '!' to assert, always set required to true
+    @Input({required: true}) avatar!: string
+    @Input({required: true}) name!: string
 
-    onSelectUser() {
-        const randIndex = Math.floor(Math.random() * DUMMY_USERS.length)
-        this.selectedUser.set(DUMMY_USERS[randIndex])
-        // if we weren't using signals
-        //this.selectedUser = DUMMY_USERS[randIndex]
+    get imagePath() {
+        return 'assets/users/' + this.avatar
     }
+    onSelectUser() { }
 }
