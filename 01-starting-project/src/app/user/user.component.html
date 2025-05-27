@@ -1,0 +1,10 @@
+<!-- accessing values that use signals need to be invoked as shown below!!! -->
+<div>
+  <button (click)="onSelectUser()">
+    <img 
+      [src]="imagePath()" 
+      [alt]="selectedUser().name"
+    />
+    <span>{{ selectedUser().name }}</span>
+  </button>
+</div>
