@@ -1,9 +1,7 @@
+<!-- invoke properties if using signals -->
 <div>
-  <button (click)="onSelectUser()">
-    <img 
-      [src]="imagePath" 
-      [alt]="name"
-    />
-    <span>{{ name }}</span>
+  <button [class.active]="isSelected" (click)="onSelectUser()">
+    <img [src]="imagePath" [alt]="user.name" />
+    <span>{{ user.name }}</span>
   </button>
 </div>
