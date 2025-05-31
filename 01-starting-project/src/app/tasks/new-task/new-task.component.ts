@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { NewTaskData } from '../task/task.model'
+import { TasksService } from '../tasks.service'
 
 @Component({
   selector: 'app-new-task',
@@ -10,23 +10,26 @@ import { NewTaskData } from '../task/task.model'
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  @Output() cancelTask = new EventEmitter<void>()
-  @Output() newTask = new EventEmitter<NewTaskData>()
+  @Input({ required: true }) userId!: string
+  @Output() closeForm = new EventEmitter<void>()
   // enteredTitle = signal('') can also use signal like this, html does not need to change
   enteredTitle = ''
   enteredDate = ''
   enteredSummary = ''
+  // another way to use DI without a constructor
+  private tasksService = inject(TasksService)
 
   onCancelTask() {
     console.log('task canceled')
-    this.cancelTask.emit()
+    this.closeForm.emit()
   }
 
   onSubmit() {
-    this.newTask.emit({
+    this.tasksService.addUserTask(this.userId, {
       title: this.enteredTitle,
       summary: this.enteredSummary,
       dueDate: this.enteredDate,
     })
+    this.closeForm.emit()
   }
 }
