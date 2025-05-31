@@ -1,7 +1,7 @@
 <!-- invoke properties if using signals -->
-<div>
+<app-card>
   <button [class.active]="isSelected" (click)="onSelectUser()">
     <img [src]="imagePath" [alt]="user.name" />
     <span>{{ user.name }}</span>
   </button>
-</div>
+</app-card>
