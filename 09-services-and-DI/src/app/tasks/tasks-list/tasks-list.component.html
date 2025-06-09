@@ -1,0 +1,24 @@
+<header>
+  <h2>My Tasks</h2>
+  <p>
+    <select (change)="onChangeTasksFilter(filter.value)" #filter>
+      <option value="all">All</option>
+      <!-- <option value="open">Open</option>
+      <option value="in-progress">In-Progress</option>
+      <option value="done">Completed</option> -->
+
+      <!-- now with injected types we can do this instead of above! -->
+      @for (option of taskStatusOptions; track option.value) {
+        <option [value]="option.value">{{ option }}</option>
+      }
+    </select>
+  </p>
+</header>
+
+<ul>
+  @for (task of tasks(); track task.id) {
+    <li>
+      <app-task-item [task]="task" />
+    </li>
+  }
+</ul>

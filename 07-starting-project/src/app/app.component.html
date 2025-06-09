@@ -1,0 +1,30 @@
+<main>
+  <app-learning-resources />
+
+  <hr />
+
+  <app-auth />
+  <!-- @if (isAdmin()) {
+    <p>admin only text</p>
+  } -->
+
+  <!-- structural directive ngif -->
+  <!-- <p *ngIf="isAdmin()">Admin only text</p> -->
+
+  <!-- ng-template is used to conditinally render elements using Structural Directives
+  this is one way of using our structural directive
+  using ng-template makes it so we do not need the * before calling it -->
+  <!-- <ng-template appAuth="admin">
+    <p>Admin only text</p>
+  </ng-template> -->
+
+  <!-- Instead of wrapping ng-template around we can just put a * before, it automatically wraps <p> in ng-template
+  It also automatically binds ([]) so if you want to pass a string you need to put '' like below -->
+  <p *appAuth="'admin'" class="protected-content admin">Admin only text</p>
+  <p *appAuth="'user'" class="protected-content unauthenticated">
+    regular user only text
+  </p>
+  <p *appAuth="'guest'" class="protected-content authenticated">
+    guest user only text
+  </p>
+</main>

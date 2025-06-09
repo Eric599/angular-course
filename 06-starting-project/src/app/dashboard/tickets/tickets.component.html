@@ -1,0 +1,16 @@
+<div>
+  <ul>
+    @for (ticket of tickets; track ticket.id) {
+      <!-- {{$first}} boolean for if it is first item -->
+      <!-- {{ $last }} boolean for if last item -->
+      <!-- {{$count}} how many items in aray -->
+      <li>
+        <app-ticket [data]="ticket" (close)="onCloseTicket(ticket.id)" />
+      </li>
+    } @empty {
+      <p>No tickets available.</p>
+    }
+  </ul>
+</div>
+
+<app-new-ticket (add)="onAdd($event)" />
